@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tesmeat_app/constant/app_colors.dart';
 import 'package:tesmeat_app/constant/app_text.dart';
+import 'package:tesmeat_app/ui/Listning.dart';
 
 class HadethPage extends StatefulWidget {
   const HadethPage({super.key});
@@ -17,7 +18,67 @@ class _HadethPageState extends State<HadethPage> {
     setState(() {
       _selectedIndex = index;
     });
-    // هون بتحط الأكشن يلي بدك يصير لما المستخدم يضغط على أي أيقونة
+
+    if (index == 2) {
+      showDialog(
+  context: context,
+  builder: (context) {
+    return Directionality( 
+      textDirection: TextDirection.rtl,
+      child: Center(
+        child: Container(
+          width: 260.w,
+          height: 280.h,
+          padding: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                "!تنويه",
+                style: TextStyle(
+                  fontSize: 15.sp,
+                  color: primary_color,
+                ),
+              ),
+              SizedBox(height: 10),
+              Text(
+                "قد يرد في هذا الحديث مفردات لها عدة قراءات \n يرجى الاستماع للحديث أولا",
+                textAlign: TextAlign.right, 
+                style: TextStyle(fontSize: 15.sp, color: sixth_color),
+              ),
+              SizedBox(height: 22),
+              Divider(),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ListningPage(),
+                    ),
+                  );
+                },
+                child: Text(
+                  "استماع",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Color(0xff442B0D),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  },
+);
+
+    }
   }
 
   @override
@@ -103,61 +164,64 @@ class _HadethPageState extends State<HadethPage> {
           ),
         ],
       ),
-     bottomNavigationBar: BottomNavigationBar(
- type: BottomNavigationBarType.fixed, // ضروري لحتى يثبت اللون
-  backgroundColor: primary_color, // لون الخلفية
-  currentIndex: _selectedIndex,
-  selectedItemColor: Colors.white, // لون المختار
-  unselectedItemColor: Colors.white,
-  onTap: _onItemTapped,
-  items: [
-    BottomNavigationBarItem(
-      icon: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: const [
-          Icon(Icons.arrow_back),
-          SizedBox(height: 4),
-          Text("السابق", style: TextStyle(fontSize: 12,color: Colors.white)),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: primary_color,
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white,
+        onTap: _onItemTapped,
+        items: [
+          BottomNavigationBarItem(
+            icon: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                Icon(Icons.arrow_back),
+                SizedBox(height: 4),
+                Text("السابق",
+                    style: TextStyle(fontSize: 12, color: Colors.white)),
+              ],
+            ),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                Icon(Icons.headphones),
+                SizedBox(height: 4),
+                Text("استماع",
+                    style: TextStyle(fontSize: 12, color: Colors.white)),
+              ],
+            ),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                Icon(Icons.mic),
+                SizedBox(height: 4),
+                Text("تسميع",
+                    style: TextStyle(fontSize: 12, color: Colors.white)),
+              ],
+            ),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                Icon(Icons.arrow_forward),
+                SizedBox(height: 4),
+                Text("التالي",
+                    style: TextStyle(fontSize: 12, color: Colors.white)),
+              ],
+            ),
+            label: '',
+          ),
         ],
       ),
-      label: '',
-    ),
-    BottomNavigationBarItem(
-      icon: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: const [
-          Icon(Icons.headphones),
-          SizedBox(height: 4),
-          Text("استماع", style: TextStyle(fontSize: 12,color: Colors.white)),
-        ],
-      ),
-      label: '',
-    ),
-    BottomNavigationBarItem(
-      icon: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: const [
-          Icon(Icons.mic),
-          SizedBox(height: 4),
-          Text("تسميع", style: TextStyle(fontSize: 12,color: Colors.white)),
-        ],
-      ),
-      label: '',
-    ),
-    BottomNavigationBarItem(
-      icon: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: const [
-          Icon(Icons.arrow_forward),
-          SizedBox(height: 4),
-          Text("التالي", style: TextStyle(fontSize: 12,color: Colors.white)),
-        ],
-      ),
-      label: '',
-    ),
-  ],
-),
-
     );
   }
 }
