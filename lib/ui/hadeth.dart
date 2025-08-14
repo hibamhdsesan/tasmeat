@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tesmeat_app/constant/app_colors.dart';
 import 'package:tesmeat_app/constant/app_text.dart';
+import 'package:tesmeat_app/model/hadeth_model.dart';
 import 'package:tesmeat_app/ui/Listning.dart';
 
 class HadethPage extends StatefulWidget {
-  const HadethPage({super.key});
+  final Hadith hadith;
+  const HadethPage({super.key, required this.hadith});
 
   @override
   State<HadethPage> createState() => _HadethPageState();
@@ -58,7 +60,7 @@ class _HadethPageState extends State<HadethPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ListningPage(),
+                      builder: (context) => ListningPage(hadith:widget.hadith, ),
                     ),
                   );
                 },
@@ -91,11 +93,12 @@ class _HadethPageState extends State<HadethPage> {
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.only(right: 64, top: 31),
+            padding: EdgeInsets.only(right: 29, top: 31),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 29),
+                  padding: const EdgeInsets.only(left: 29),
                   child: Container(
                     width: 74.w,
                     height: 35.h,
@@ -103,14 +106,33 @@ class _HadethPageState extends State<HadethPage> {
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.white,
                     ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Icon(
+                          Icons.edit,
+                          size: 16,
+                          color: Colors.yellow,
+                        ),
+                        Text(
+                          "150",
+                          style: TextStyle(fontSize: 14, color: Colors.yellow),
+                        ),
+                      ],
+                    ),
+                  
+                  
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(right: 62),
-                  child: Text(" سمع الحديث النبوي"),
-                ),
+                Text("سمع الحديث النبوي",
+                    style: TextStyle(
+                        color: text_color,
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.bold)),
               ],
             ),
+        
+        
           ),
          
          
@@ -132,7 +154,7 @@ class _HadethPageState extends State<HadethPage> {
             ),
             child: Center(
               child: Text(
-                alrawi,
+                widget.hadith.raawi,
                 style: TextStyle(
                   color: alrawi_color,
                   fontSize: 18.sp,
@@ -158,7 +180,7 @@ class _HadethPageState extends State<HadethPage> {
             ),
             child: Center(
               child: Text(
-                first_hadeth,
+               widget.hadith.content ,
                 textAlign: TextAlign.right,
                 style: TextStyle(fontSize: 18.sp),
               ),

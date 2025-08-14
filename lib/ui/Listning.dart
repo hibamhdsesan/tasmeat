@@ -3,10 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tesmeat_app/constant/app_colors.dart';
 import 'package:tesmeat_app/constant/app_text.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:tesmeat_app/model/hadeth_model.dart';
 import 'package:tesmeat_app/ui/tasmeaa.dart';
 
 class ListningPage extends StatefulWidget {
-  const ListningPage({super.key});
+  final Hadith hadith;
+  const ListningPage({super.key, required this.hadith});
 
   @override
   State<ListningPage> createState() => _ListningPageState();
@@ -65,7 +67,7 @@ class _ListningPageState extends State<ListningPage> {
     });
     if (index == 2) {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => TasmeaaPAge()));
+          context, MaterialPageRoute(builder: (context) => TasmeaaPAge(hadith:widget.hadith)));
     }
   }
 
@@ -79,11 +81,12 @@ class _ListningPageState extends State<ListningPage> {
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.only(right: 64, top: 31),
-            child: Row(
+            padding: EdgeInsets.only(right: 29, top: 31),
+            child:  Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 29),
+                  padding: const EdgeInsets.only(left: 29),
                   child: Container(
                     width: 74.w,
                     height: 35.h,
@@ -91,14 +94,33 @@ class _ListningPageState extends State<ListningPage> {
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.white,
                     ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Icon(
+                          Icons.edit,
+                          size: 16,
+                          color: Colors.yellow,
+                        ),
+                        Text(
+                          "150",
+                          style: TextStyle(fontSize: 14, color: Colors.yellow),
+                        ),
+                      ],
+                    ),
+                  
+                  
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(right: 62),
-                  child: Text(" سمع الحديث النبوي"),
-                ),
+                Text("سمع الحديث النبوي",
+                    style: TextStyle(
+                        color: text_color,
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.bold)),
               ],
             ),
+        
+        
           ),
           SizedBox(height: 23),
           Container(

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:record/record.dart';
+import 'package:tesmeat_app/model/hadeth_model.dart';
 import 'package:tesmeat_app/service/assemplyService.dart';
 import 'package:tesmeat_app/ui/text_compare.dart';
 
 class VoiceTranscriptionPage extends StatefulWidget {
+  
   @override
   _VoiceTranscriptionPageState createState() => _VoiceTranscriptionPageState();
 }
